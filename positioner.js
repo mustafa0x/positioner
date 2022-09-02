@@ -10,7 +10,8 @@ function getScroll(el) {
  * pos -- top | bottom | right | left
  * cont -- the container to position within (default: document.body)
  */
-export default function positioner(el, rect, pos, cont=document.body) {
+export default function positioner(el, rect, pos, cont) {
+    cont = cont || document.body
     const docEl = document.documentElement;
     const windowWidth = (docEl.clientWidth || document.body.clientWidth);
     const windowHeight = (docEl.clientHeight || document.body.clientHeight);
