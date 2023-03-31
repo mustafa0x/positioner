@@ -1,6 +1,6 @@
 {
   "name": "positioner",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "module": "positioner.js",
   "repository": "github:mustafa0x/positioner",
   "type": "module"

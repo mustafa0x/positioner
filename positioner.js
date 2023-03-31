@@ -12,19 +12,18 @@ function getScroll(el) {
  */
 export default function positioner(el, rect, pos, cont) {
     cont = cont || document.body
-    const docEl = document.documentElement;
-    const windowWidth = (docEl.clientWidth || document.body.clientWidth);
-    const windowHeight = (docEl.clientHeight || document.body.clientHeight);
+    const contWidth = cont.clientWidth
+    const contHeight = cont.clientHeight
     const elwh = {w: el.offsetWidth, h: el.offsetHeight};
     const linkDimensions = {w: rect.right - rect.left, h: rect.bottom - rect.top};
     const halfTopExceed = rect.top + linkDimensions.h/2 - elwh.h/2 < 0;
     const halfLeftExceed = rect.left + linkDimensions.w/2 - elwh.w/2 < 0;
-    const halfRightExceed = rect.left + elwh.w/2 + linkDimensions.w/2 >= windowWidth;
-    const halfBottomExceed = rect.top + elwh.h/2 + linkDimensions.h/2 >= windowHeight;
+    const halfRightExceed = rect.left + elwh.w/2 + linkDimensions.w/2 >= contWidth;
+    const halfBottomExceed = rect.top + elwh.h/2 + linkDimensions.h/2 >= contHeight;
     const topExceed = rect.top - elwh.h < 0;
     const leftExceed = rect.left - elwh.w < 0;
-    const bottomExceed = rect.top + elwh.h + linkDimensions.h >= windowHeight;
-    const rightExceed = rect.left + elwh.w + linkDimensions.w >= windowWidth;
+    const bottomExceed = rect.top + elwh.h + linkDimensions.h >= contHeight;
+    const rightExceed = rect.left + elwh.w + linkDimensions.w >= contWidth;
 
     // recompute pos
     // first, when both 'left' and 'right' limits are exceeded, we fall back to top|bottom
@@ -79,8 +78,8 @@ export default function positioner(el, rect, pos, cont) {
             leftPosition = 0;
             if (arrow) arrowLeft = rect.left + linkDimensions.w/2 - arrowWidth;
         } else if (halfRightExceed) {
-            leftPosition = windowWidth - elwh.w*1.01;
-            if (arrow) arrowLeft = elwh.w - (windowWidth - rect.left) + linkDimensions.w/2 - arrowWidth/2;
+            leftPosition = contWidth - elwh.w*1.01;
+            if (arrow) arrowLeft = elwh.w - (contWidth - rect.left) + linkDimensions.w/2 - arrowWidth/2;
         } else {
             leftPosition = rect.left + scroll.x - elwh.w/2 + linkDimensions.w/2;
             if (arrow) arrowLeft = elwh.w/2 - arrowWidth/2;
